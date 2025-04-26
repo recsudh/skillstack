@@ -1,16 +1,16 @@
-const User = require("../models/user")
+const Recruiter= require("../models/recruiter")
 const bcryptjs= require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 
 const sign_up= async (req,res)=>{
     try{
-        const user =  User(req.body)
+        const recruiter =  Recruiter(req.body)
 
-        await user.save()
+        await recruiter.save()
         res.status(201).send({
             message:"successfull!!",
-            user
+            recruiter
         })
         }catch (e){     
             res.status(500).send({
@@ -20,10 +20,10 @@ const sign_up= async (req,res)=>{
     }
 }
 
-const sign_in=async(req,res,next)=>{
+const sign_in=async(req,res)=>{
     try{
         const {email,password}= req.body
-        const user = await User.findOne({email})
+        const recruiter = await Recruiter.findOne({email})
         if(!user){
             return  res.status(500).send({Error:"email or password is incorrect!"})
         }
@@ -31,11 +31,11 @@ const sign_in=async(req,res,next)=>{
         if(!is_match){
             return  res.status(500).send({Error:"email or password is incorrect!"})
         }
-        const token =  jwt.sign({_id:user._id},process.env.USER_KEY)
-        res.cookie('jwt',token, { httpOnly: true, secure: true, maxAge: 3600000 })
+        const token =  jwt.sign({_id:user._id},process.env.RECRUITER_KEY)
+        res.cookie('rec_jwt',token, { httpOnly: true, secure: true, maxAge: 3600000 })
         res.status(200).send({
             message:"successfull!!",
-            user
+            recruiter
         })
         
     }catch(e){
@@ -49,7 +49,7 @@ const sign_in=async(req,res,next)=>{
 
 const logout= async(req,res)=>{
     try{   
-    res.clearCookie("jwt",{ httpOnly: true, secure: true }).status(202).send({
+    res.clearCookie("rec_jwt",{ httpOnly: true, secure: true }).status(202).send({
         message:"Successfully logged out!",
     })
 }catch(e){

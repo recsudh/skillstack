@@ -7,6 +7,7 @@ const morgan= require("morgan")
 
 // routes
 const user_route= require("../routes/user")
+const rec_route= require("../routes/recruiter")
 
 // middleware
 const error = require("../middleware/error")
@@ -26,6 +27,7 @@ app.use(cors())
 app.use(morgan("dev"))
 app.use(error)
 app.use("/api/v1",user_route)
+app.use("/api/v1",rec_route)
 
 
 const port = process.env.PORT || 3000;
