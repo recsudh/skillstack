@@ -15,6 +15,7 @@ recruiter_schema.pre("save",async function(next){
     next()
 })
 
+console.log("hello there");
 
 const recruiter = mongoose.model("recuiter",recruiter_schema)
 
