@@ -1,7 +1,7 @@
 const express = require("express")
 const {sign_up,sign_in,logout}= require("../controller/user_controller")
 const {sign_up_validation,sign_in_validation}=require("../utils/user_input_validation")
-const auth= require("../middleware/auth")
+const {auth}= require("../middleware/auth")
 
 const user_route = express.Router()
 
