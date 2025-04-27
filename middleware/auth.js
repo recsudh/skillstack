@@ -27,7 +27,7 @@ const rec_auth = async function (req, res, next) {
         console.log(req.headers);
         const token = req.headers.cookie.replace("rec_jwt=","");
         console.log(token);
-        const verify = jwt.verify(token,process.env.USER_KEY)
+        const verify = jwt.verify(token,process.env.RECRUITER_KEY)
         if(!verify){
         res.status(500).send("Error:Invalid token")
     }

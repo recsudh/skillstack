@@ -8,11 +8,13 @@ const recruiter_schema= new mongoose.Schema({
     organization:{type:String,required:true}
 }) 
 recruiter_schema.pre("save",async function(next){
-    const User = this0
+   try{ const User = this
     if(User.isModified("password")){
         User.password = await bcryptjs.hash(User.password,8)
     }
-    next()
+    next()}catch(e){
+        res.status(500).send({Error:e.message})
+    }
 })
 
 console.log("hello there");

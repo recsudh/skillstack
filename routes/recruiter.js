@@ -10,7 +10,7 @@ rec_route.post("/rec/sign_up",rec_sign_up_validation,sign_up)
 
 
 // sign_in
-rec_route.post("rec/sign_in",rec_sign_in_validation,sign_in)
+rec_route.post("/rec/sign_in",rec_sign_in_validation,sign_in)
 
 
 // log_out

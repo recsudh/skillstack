@@ -28,13 +28,11 @@ const rec_sign_up_validation= (req,res,next)=>{
 
 const rec_sign_in_validation=(req,res,next)=>{
     try{
-
         const userschema = z.object({
             email:z.string().email({ message: "Invalid email address" }),
             password:z.string().min(5, { message: "Must be more than 5 characters long" }),
 
         })
-
         const parsed = userschema.safeParse(req.body)
         if(!parsed.success){
             return res.send({
